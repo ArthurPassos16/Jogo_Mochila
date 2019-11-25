@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main()
+{
+    srand(time(NULL));
+    int opcao, cargaBolsa;
+    do{
+        system("CLS");
+        printf("1 - JOGAR\n2 - RECORDES\n3 - SAIR\n");
+        scanf("%d",&opcao);
+        system("CLS");
+        switch(opcao){
+            case 1:
+                printf("JOGO\n");
+                cargaBolsa=1+rand()%49;
+
+                printf("%d\n",1+rand()%19);
+
+                system("PAUSE");
+            break;
+            case 2:
+                system("PAUSE");
+            break;
+            case 3:
+                printf("JOGO ENCERRADO!\n");
+            break;
+            default:
+                printf("Opcao Invalida!\n");
+                system("PAUSE");
+            break;
+        }
+    }while(opcao!=3);
+    return 0;
+}
