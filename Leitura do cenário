@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <string.h>
+
+typedef struct{
+  int peso;
+  int valor;
+}Objeto;
+
+int main(void) {
+  FILE* cenario;
+  int ni,cp;
+  int *peso;
+  int *valor;
+
+  cenario = fopen ("cenario.txt" , "r");
+  if (cenario == NULL){
+    printf ("Erro de abertura");
+    return -1;
+  }
+
+  fscanf(cenario,"%d %d", &ni, &cp);
+
+  peso=malloc(sizeof(int)*ni);
+  valor=malloc(sizeof(int)*cp);
+
+  if(peso==NULL || valor==NULL)
+    return -1;
+
+  for(int i=0;i<ni;i++){
+    fscanf(cenario,"%d",&peso[i]);
+  }
+  for(int i=0;i<ni;i++){
+    fscanf(cenario,"%d",&valor[i]);
+  }
+  fclose (cenario);
+  return 0;
+}
