@@ -2,10 +2,13 @@
 #include <stdlib.h>
 #include <time.h>
 #include "leituras.h"
+#include "logica.h"
 
 int main(){
     Objeto *objeto=NULL;
     Mochila *mochila=NULL;
+    int resultado;
+    char s;
 
     objeto=leituraObjeto();
     mochila=leituraMochila();
@@ -16,13 +19,17 @@ int main(){
         scanf("%d",&opcao);
         switch(opcao){
             case 1:
-                printf("JOGO\n");
+                printf("-----------------------JOGO-----------------------\n");
+                printf("PESO\tVALOR\t\n");
                 for(int i=0;i<mochila->num_itens;i++){
-                  printf("Peso: %d\n",objeto[i].peso);
-                  printf("Valor: %d\n",objeto[i].valor);
+                  printf(" %d\t\t %d\t\n",objeto[i].peso,objeto[i].valor);
                 }
+                resultado=knapSack(mochila->cap_max,objeto, mochila->num_itens);
+                printf("\nResultado: %d\n\n",resultado);
             break;
             case 2:
+                printf("\nRECORDES\n");
+                getchar();
             break;
             case 3:
                 printf("JOGO ENCERRADO!\n");
