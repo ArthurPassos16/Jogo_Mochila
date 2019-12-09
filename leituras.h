@@ -2,6 +2,11 @@
 #include <string.h>
 
 typedef struct{
+  char *nome;
+  int recorde;
+}Jogador;
+
+typedef struct{
   int peso;
   int valor;
 }Objeto;
@@ -12,42 +17,13 @@ typedef struct{
   Objeto *objeto;
 }Mochila;
 
-Objeto *leituraObjeto() {
-  FILE* cenario;
+Mochila *lerMochila(){
+  Mochila *mochila=NULL;
   Objeto *objeto=NULL; 
+  FILE *cenario=NULL;
   int num_itens,cap_max,peso,valor;
 
-  cenario = fopen ("cenario.txt" , "r");
-  if (cenario == NULL){
-    printf ("Erro de abertura");
-    return NULL;
-  }
-
-  fscanf(cenario,"%d %d", &num_itens, &cap_max);
-
-  objeto=(Objeto *)malloc(sizeof(Objeto)*num_itens);
-
-  if(objeto==NULL)
-    return NULL;
-
-  for(int i=0;i<num_itens;i++){
-    fscanf(cenario,"%d",&peso);
-    objeto[i].peso=peso;
-  }
-  for(int i=0;i<num_itens;i++){
-    fscanf(cenario,"%d",&valor);
-    objeto[i].valor=valor;
-  }
-  fclose (cenario);
-  return objeto;
-}
-
-Mochila *leituraMochila(){
-  Mochila *mochila=NULL;
-  FILE *cenario=NULL;
-  int num_itens,cap_max;
-
-  cenario = fopen ("cenario.txt" , "r");
+  cenario = fopen ("cenario1.txt" , "r");
 
   if (cenario == NULL){
     printf ("Erro de abertura");
@@ -59,5 +35,71 @@ Mochila *leituraMochila(){
   
   mochila->num_itens=num_itens;
   mochila->cap_max=cap_max;
+
+  mochila->objeto=(Objeto *)malloc(sizeof(Objeto)*num_itens);
+
+  if(mochila->objeto==NULL)
+    return NULL;
+
+  for(int i=0;i<num_itens;i++){
+    fscanf(cenario,"%d",&valor);
+    mochila->objeto[i].valor=valor;
+  }
+
+  for(int i=0;i<num_itens;i++){
+    fscanf(cenario,"%d",&peso);
+    mochila->objeto[i].peso=peso;
+  }
+
+  fclose(cenario);
+
   return mochila;
+}
+
+int escreverRecorde(){
+  FILE *recorde=NULL;
+  Jogador *jogador=NULL;
+
+  recorde = fopen("recorde.txt","w");
+
+  if(recorde==NULL){
+    printf ("Erro de abertura");
+    return 0;
+  }
+
+  fprintf(recorde,"%s %d\n",jogador->nome,jogador->recorde);
+
+  fclose(recorde);
+  return 1;
+}
+
+Jogador *lerRecorde(){
+  FILE *recorde=NULL;
+  Jogador *jogador=NULL;
+
+  char nome[100];
+  int resultado;
+
+  recorde = fopen("recorde.txt","r");
+
+  if(recorde==NULL){
+    printf ("Erro de abertura\n");
+    return NULL;
+  }
+
+  
+  jogador=malloc(sizeof(Jogador)*5);
+
+  for(int i=0;i<5;i++){
+    fscanf(recorde,"%s %d",nome, &resultado);
+    
+    jogador[i].nome=malloc(sizeof(char)*strlen(nome));
+
+    strcpy(jogador[i].nome,nome);
+    jogador[i].recorde=resultado;
+  }
+
+  fclose(recorde);
+  
+  return jogador;
 }
