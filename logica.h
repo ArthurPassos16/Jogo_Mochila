@@ -9,7 +9,7 @@ int *knapSack(int cap_max, Objeto *objeto, int n)
     int i,j=1, w, aux; 
     int K[n + 1][cap_max + 1]; 
   
-    // Build table K[][] in bottom up manner 
+    // Cria a tabela K[][] de maneira ascendente
     for (i = 0; i <= n; i++) { 
         for (w = 0; w <= cap_max; w++) { 
             if (i == 0 || w == 0) 
