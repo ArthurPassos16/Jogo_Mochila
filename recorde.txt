@@ -1,3 +1,5 @@
-Arthur 45
-Estephane 39
-Pedro 314
+Arthur 0
+Pedro 0
+Estephane 0
+Glaubos 0
+Viviane 0
